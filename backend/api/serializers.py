@@ -176,27 +176,27 @@ class RecipeSerializer(BaseRecipeSerializer):
 
     @transaction.atomic
     def update(self, instance, validated_data):
-        instance.image = validated_data.get('image', instance.image)
-        instance.name = validated_data.get('name', instance.name)
-        instance.text = validated_data.get('text', instance.text)
-        instance.cooking_time = validated_data.get('cooking_time',
-                                                   instance.cooking_time)
+        tags = validated_data.pop('tags')
+        ingredients = validated_data.pop('ingredients')
+        instance.name = validated_data.get('name')
+        instance.text = validated_data.get('text')
+        instance.image = validated_data.get('image')
+        instance.cooking_time = validated_data.get('cooking_time')
+        instance.save()
 
-        instance.tags.clear()
-        tags = self.validated_data.get('tags', instance.tags)
+        RecipeIngredient.objects.filter(recipe=instance).delete()
+
         instance.tags.set(tags)
 
-        RecipeIngredient.objects.filter(recipe_id=instance).all().delete()
-        ingredients = validated_data.get('ingredients', instance.ingredients)
+        recipe_ingredients = []
         for ingredient in ingredients:
-            ingredient_obj = get_object_or_404(Ingredient,
-                                               id=ingredient['id'])
-            RecipeIngredient.objects.create(
-                recipe_id=instance,
-                ingredient=ingredient_obj,
-                amount=ingredient['amount']
-            )
-        instance.save()
+            recipe_ingredients.append(RecipeIngredient(
+                recipe=instance,
+                ingredient=ingredient["id"],
+                amount=ingredient["amount"],
+            ))
+        RecipeIngredient.objects.bulk_create(recipe_ingredients)
+
         return instance
 
 

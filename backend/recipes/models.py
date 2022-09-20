@@ -169,7 +169,7 @@ class RecipeIngredient(models.Model):
         )
 
     def __str__(self):
-        return f'{self.ingredient} - {self.amount}'
+        return f'{self.ingredient.name} - {self.amount}'
 
 
 class Favorites(models.Model):
@@ -199,7 +199,7 @@ class Favorites(models.Model):
         )
 
     def __str__(self):
-        return f'{self.user} - {self.recipe}'
+        return f'{self.user.username} - {self.recipe.name}'
 
 
 class ShoppingCart(models.Model):
@@ -229,7 +229,7 @@ class ShoppingCart(models.Model):
         )
 
     def __str__(self):
-        return f'{self.user} - {self.recipe}'
+        return f'{self.user.username} - {self.recipe.name}'
 
 
 class Follow(models.Model):
@@ -258,4 +258,4 @@ class Follow(models.Model):
         ]
 
     def __str__(self):
-        return f'{self.user} - {self.author}'
+        return f'{self.user.username} - {self.author.username}'
