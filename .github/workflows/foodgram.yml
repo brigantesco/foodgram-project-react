@@ -63,7 +63,6 @@ jobs:
           script: |
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/infra_backend:v1
             sudo docker-compose stop
-            sudo docker rm backend
             touch .env
             echo SECRET_SWITCH=${{ secrets.SECRET_SWITCH }} >> .env
             echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
