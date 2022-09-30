@@ -7,7 +7,6 @@ from recipes.models import (Favorites, Follow, Ingredient, Recipe,
                             RecipeIngredient, ShoppingCart, Tag)
 from rest_framework import generics, permissions, viewsets
 from rest_framework.decorators import action
-from rest_framework.filters import SearchFilter
 from rest_framework.response import Response
 from rest_framework.status import (HTTP_201_CREATED, HTTP_204_NO_CONTENT,
                                    HTTP_400_BAD_REQUEST)
@@ -27,7 +26,7 @@ class BaseRecipeViewSet(viewsets.ModelViewSet, AddDelMixin):
     serializer_class = RecipeSerializer
     pagination_class = CustomListPagination
     permission_classes = (AuthorOrReadOnly,)
-    filter_backends = (DjangoFilterBackend, SearchFilter)
+    filter_backends = (DjangoFilterBackend,)
     filterset_class = RecipeFilter
 
     def add_del_obj(self, model, request, pk=None):

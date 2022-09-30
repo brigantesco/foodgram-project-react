@@ -3,7 +3,7 @@
 Проект FOODGRAM
 [![foodgram_workflow](https://github.com/brigantesco/foodgram-project-react/actions/workflows/foodgram.yml/badge.svg?branch=master)](https://github.com/brigantesco/foodgram-project-react/actions/workflows/foodgram.yml)
 Проект находится по адресу: 
-84.252.129.8
+178.154.222.148 или foodgramdiplom.ddns.net
 
 Описание:
 Онлайн и API сервис для публикации рецептов, можно добавлять понравившиеся рецепты и скачивать список продуктов для них, 

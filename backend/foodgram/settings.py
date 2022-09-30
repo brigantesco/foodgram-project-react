@@ -9,7 +9,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv(
     'SECRET_KEY', default='3ctl4$x4cre_k&&w!r08&np!c^jfke4!=resp7%48s+95i+n55')
 
-DEBUG = os.getenv('SECRET_SWITCH', default=False)
+DEBUG = int(os.getenv('SECRET_SWITCH', default=False))
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', default=['*'])
 
@@ -131,9 +131,9 @@ DJOSER = {
 }
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    # ],
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
