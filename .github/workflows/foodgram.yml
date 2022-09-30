@@ -75,6 +75,8 @@ jobs:
             echo DB_HOST=${{ secrets.DB_HOST }} >> .env
             echo DB_PORT=${{ secrets.DB_PORT }} >> .env
             sudo docker-compose up -d --build
+            sudo docker-compose exec -T infra_backend python manage.py migrate
+            sudo docker-compose exec -T Infra_backend python manage.py collectstatic --no-input
 
   send_message:
     runs-on: ubuntu-latest
